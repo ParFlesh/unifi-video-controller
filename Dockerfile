@@ -1,9 +1,12 @@
 FROM ubuntu
 
-ADD https://dl.ubnt.com/firmwares/ufv/v3.10.1/unifi-video.Debian7_amd64.v3.10.1.deb /
+ARG UV_VER=v3.10.1
 
 RUN apt update && \
-	apt install -y /unifi-video.Debian7_amd64.v3.10.1.deb && \
+	apt install -y wget && \
+	wget https://dl.ubnt.com/firmwares/ufv/${UV_VER}/unifi-video.Debian7_amd64.${UV_VER}.deb && \
+	apt install -y ./unifi-video.Debian7_amd64.${UV_VER}.deb && \
+	rm ./unifi-video.Debian7_amd64.${UV_VER}.deb && \
 	mkdir /config && \
 	chown -Rf 1001:0 /config /usr/lib/unifi-video && \
 	chmod -Rf 770 /config /usr/lib/unifi-video && \
