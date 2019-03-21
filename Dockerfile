@@ -4,10 +4,14 @@ ADD https://dl.ubnt.com/firmwares/ufv/v3.10.1/unifi-video.Debian7_amd64.v3.10.1.
 
 RUN apt update && \
 	apt install -y /unifi-video.Debian7_amd64.v3.10.1.deb && \
+	mkdir /config && \
+	chown -Rf 1001:0 /config /usr/lib/unifi-video && \
 	apt clean && \
 	rm -Rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 ADD root/ /
+
+USER 1001
 
 WORKDIR /usr/lib/unifi-video
 VOLUME /config
