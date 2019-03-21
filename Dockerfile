@@ -6,6 +6,7 @@ RUN apt update && \
 	apt install -y /unifi-video.Debian7_amd64.v3.10.1.deb && \
 	mkdir /config && \
 	chown -Rf 1001:0 /config /usr/lib/unifi-video && \
+	chmod -Rf 770 /config /usr/lib/unifi-video && \
 	apt clean && \
 	rm -Rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
